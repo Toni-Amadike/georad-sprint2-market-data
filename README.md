@@ -1,5 +1,5 @@
-GeoRAD Sprint 2 – Spatial Questions to Market Data
-What Problem the Notebook Solves
+# GeoRAD Sprint 2 – Spatial Questions to Market Data
+What Problem the Notebook Solves:
 The notebook demonstrates how spatial locations can be connected to real-world market information. It investigates the current indicative land price per square metre for five selected locations in **Mosan-Okunola LCDA, Lagos State**.
 ## Inputs
 The notebook takes:
@@ -43,3 +43,75 @@ The recorded asking-price levels vary across the five towns. Okunola has the hig
 These differences provide an indicative comparison of the collected market observations rather than a definitive ranking of the overall land market.
 ## Limitations
 The main limitation is that only one market-price observation is available for each town. This is not enough to establish a reliable market-price range or measure price variation within each town. The prices are also asking prices and may differ from actual transaction prices. A larger dataset containing multiple listings or transaction records per town, together with property characteristics such as plot size, location, accessibility, and land-use type, would provide a stronger basis for market analysis.
+# GeoRAD Sprint 4: Satellite Imagery to Spatial Intelligence
+## Spatial Question
+How can satellite imagery and the Normalized Difference Built-up Index (NDBI) be used to assess changes in a development indicator between 2016 and 2026 across selected locations in Mosan-Okunola LCDA, Lagos State?
+The analysis compares an NDBI-based development indicator for the two periods and measures the change for each selected location.
+## Locations
+The study was carried out in five selected locations within Mosan-Okunola LCDA, Lagos State, Nigeria:
+* Abesan 1
+* Abesan 2
+* Gowon Estate
+* Mosan / Akinoggun
+* Okunola
+## Imagery and Data
+The analysis used *Landsat 8/9 Surface Reflectance imagery* accessed through Google Earth Engine.
+The imagery was used to calculate the *Normalized Difference Built-up Index (NDBI)* for 2016 and 2026. Cloud masking and annual image composites were applied before calculating the index.
+The analysis was implemented using:
+* Google Earth Engine
+* Google Colab
+* Python
+* Landsat 8/9 Surface Reflectance imagery
+* NDBI
+## Workflow
+The main workflow was:
+* Define the five study locations.
+* Load Landsat 8/9 Surface Reflectance imagery.
+* Apply cloud masking.
+* Create imagery composites for 2016 and 2026.
+* Calculate NDBI.
+* Apply the selected NDBI threshold.
+* Estimate the percentage of pixels meeting the development indicator within each location.
+* Compare the 2016 and 2026 values.
+* Calculate Development Change.
+* Classify the resulting change.
+* Produce a table and visualisation of the results.
+* Perform a threshold sensitivity experiment using an NDBI threshold of 0.05.
+* Validate the final calculations and classifications.
+The **main analysis used an NDBI threshold of 0.0**. The 0.05 threshold was used separately as a sensitivity experiment.
+## How Development Change Was Measured
+Development Change was calculated as:
+*Development Change = Recent Development (%) − Earlier Development (%)*
+Therefore:
+* **Earlier Development (%)** = NDBI-based development indicator for 2016
+* **Recent Development (%)** = NDBI-based development indicator for 2026
+* **Development Change** = 2026 value − 2016 value
+The main results were:
+| Location          | 2016 Development (%) | 2026 Development (%) | Development Change (pp) |
+| Abesan 2          |                71.13 |                69.63 |                   -1.50 |
+| Okunola           |                91.18 |                86.06 |                   -5.12 |
+| Mosan / Akinoggun |                76.37 |                71.23 |                   -5.15 |
+| Gowon Estate      |                93.66 |                80.67 |                  -13.00 |
+| Abesan 1          |                87.64 |                72.89 |                  -14.75 |
+
+The changes are expressed in *percentage points (pp)*.
+The resulting Development Change values were classified using the classification rule defined in the notebook. Based on the calculated values, all five locations were classified as *Low*.
+## Observations
+The results show that all five selected locations recorded negative changes in the NDBI-based development indicator between the two periods.
+*Abesan 2* recorded the smallest negative change at *-1.50 percentage points*.
+*Abesan 1* recorded the largest negative change at *-14.75 percentage points*.
+*Gowon Estate* recorded a change of *-13.00 percentage points*.
+*Okunola* and *Mosan / Akinoggun* recorded changes of approximately *-5.12* and *-5.15 percentage points*, respectively.
+A threshold sensitivity experiment was also carried out by changing the NDBI threshold from *0.0 to 0.05*. This demonstrated that the selected threshold can affect the estimated development percentage.
+The results therefore show the importance of considering analytical parameters when interpreting satellite-derived indicators.
+## Limitations
+* NDBI is a *spectral indicator* and should not be interpreted as a direct inventory of buildings or development.
+* NDBI values can also be influenced by *bare or exposed soil*, which may affect the estimated development indicator.
+* A change in the NDBI-based indicator does not by itself prove that construction or demolition occurred.
+* The results are sensitive to the selected NDBI threshold, as demonstrated by the sensitivity experiment.
+* The 2026 imagery represents the available imagery for the analysis period and may not represent a complete calendar year.
+* The results should therefore be interpreted as changes in an **NDBI-based development indicator**, rather than definitive measurements of physical development.
+## Validation
+The final calculations and classifications were checked in the notebook.
+* **All calculations valid: True**
+* **All classifications valid: True**
