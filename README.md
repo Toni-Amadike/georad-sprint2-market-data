@@ -43,7 +43,7 @@ The recorded asking-price levels vary across the five towns. Okunola has the hig
 These differences provide an indicative comparison of the collected market observations rather than a definitive ranking of the overall land market.
 ## Limitations
 The main limitation is that only one market-price observation is available for each town. This is not enough to establish a reliable market-price range or measure price variation within each town. The prices are also asking prices and may differ from actual transaction prices. A larger dataset containing multiple listings or transaction records per town, together with property characteristics such as plot size, location, accessibility, and land-use type, would provide a stronger basis for market analysis.
-# GeoRAD Sprint 4: Satellite Imagery to Spatial Intelligence
+# Sprint 4: Satellite Imagery to Spatial Intelligence
 ## Spatial Question
 How can satellite imagery and the Normalized Difference Built-up Index (NDBI) be used to assess changes in a development indicator between 2016 and 2026 across selected locations in Mosan-Okunola LCDA, Lagos State?
 The analysis compares an NDBI-based development indicator for the two periods and measures the change for each selected location.
@@ -115,3 +115,87 @@ The results therefore show the importance of considering analytical parameters w
 The final calculations and classifications were checked in the notebook.
 * **All calculations valid: True**
 * **All classifications valid: True**
+# Sprint 5: Land Intelligence — Mosan-Okunola LCDA
+## Project Overview
+The Land Intelligence application is a web-based prototype developed as part of the GeoRAD Mentorship Programme, Sprint 5: From Signals to Land Intelligence.
+The project integrates Market Intelligence and Development Change data for five assigned locations in Mosan-Okunola Local Council Development Area (LCDA), Lagos State, Nigeria.
+The application allows users to search for a supported town or ward, view its location on a map, and access its land market and development-change information.
+## Key Features
+- Interactive base map displaying the supported locations.
+- Search functionality for the five assigned locations.
+- Location matching and map highlighting.
+- Display of Market Intelligence and Development Change information.
+- Unavailable-location feedback displaying `Town not available.`
+## Database Structure
+The integrated database is stored in JSON format at:
+`data/land-intelligence.json`
+The file contains an array of location records. Each record combines location coordinates, market intelligence information, and development-change results.
+### Database Fields
+| Field | Description |
+| `town` | Town or ward name |
+| `lat` | Latitude coordinate |
+| `lng` | Longitude coordinate |
+| `currentMarketRange` | Indicative current market range, where available |
+| `indicativeMarketLevel` | Indicative land market level |
+| `currentLandPricePerSqm` | Indicative land asking price per square metre |
+| `supportingSource` | Source supporting the market information |
+| `dateSearched` | Date the market information was searched |
+| `earlierYear` | Earlier year used in the development comparison |
+| `earlierDevelopment` | Earlier development indicator |
+| `recentYear` | Recent year used in the development comparison |
+| `recentDevelopment` | Recent development indicator |
+| `developmentChange` | Difference between the development indicators |
+| `developmentChangeLevel` | Assigned development-change category |
+| `notes` | Additional notes, where available |
+The database also includes a `notes` field for contextual information. Some values may be empty where information was not available.
+## Data Interpretation and Limitations
+The land prices in this prototype are indicative asking-price information gathered from supporting sources. They should not be interpreted as verified transaction prices, formal property valuations, or guaranteed market values.
+Development-change indicators represent the results of the preceding analysis. Their interpretation depends on the methodology and data used in that analysis.
+The application is a prototype intended to support location-based exploration of land intelligence. Its outputs should be interpreted alongside their supporting sources and the limitations of the underlying data.
+## Project Structure
+The main application files are organised as follows:
+```text
+land-intelligence/
+├── index.html
+├── app.js
+├── styles.css
+├── README.md
+├── data/
+│   └── land-intelligence.json
+└── notebooks/
+```
+The `index.html` file provides the application page, `app.js` handles application behaviour, and `styles.css` contains the styling. The integrated database is stored in the `data` folder. The `notebooks` folder contains relevant notebook files, if included in the repository.
+## Requirements
+- A modern web browser.
+- Node.js and npm installed on the computer.
+- The project files, including `data/land-intelligence.json`.
+## How to Run the Application Locally
+1. Download or clone this repository to your computer.
+2. Open the project folder named `land-intelligence` in Visual Studio Code.
+3. Open the integrated terminal.
+4. Confirm that the terminal is in the folder containing `index.html`.
+5. Start a local web server by running:
+   **Windows PowerShell:**
+   ```powershell
+   npx.cmd --yes serve .
+   ```
+   **Other terminals where `npx` is available:**
+   ```bash
+   npx --yes serve .
+   ```
+6. Wait for the terminal to display the local server address.
+7. Open that address in your web browser.
+8. Search for one of the five supported locations and inspect the displayed information.
+If the terminal requests permission to install the `serve` package, review the prompt and proceed if appropriate. An internet connection may be required the first time the package is downloaded.
+## Testing
+The application should be tested to confirm that:
+1. The base map loads.
+2. Supported locations can be searched.
+3. A matching location is displayed on the map.
+4. Market Intelligence and Development Change details are available for the selected location.
+5. Searching for an unsupported location displays the exact message `Town not available.`
+## Sprint Deliverable
+This project represents the integration of previous spatial analysis and land intelligence exercises into a simple, searchable web application. It demonstrates how spatial location information, indicative market data, and development-change indicators can be combined into a single prototype.
+**Programme:** GeoRAD Mentorship Programme  
+**Sprint:** Week 6 — Sprint 5: From Signals to Land Intelligence  
+**Study Area:** Mosan-Okunola LCDA, Lagos State, Nigeria
